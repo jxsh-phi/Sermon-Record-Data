@@ -5,8 +5,6 @@ class Sermon():
         self.passage = passage
         self.url = url
         self.speaker = speaker
-        # print(self.date, self.book, self.passage, self.url, self.speaker)
-
 
 class SermonDatabase():
     def __init__(self):
@@ -14,8 +12,13 @@ class SermonDatabase():
 
     def add_sermon(self, sermon):
         self.sermon_list.append(sermon)
-        print(self.sermon_list)
 
+    def remove_sermon(self, sermon):
+        self.sermon_list.remove(sermon)
+
+    def display_sermon(self):
+        for sermon in self.sermon_list:
+            print(sermon.date, sermon.book, sermon.passage, sermon.url, sermon.speaker)
 
 # ----------------------------------------------------------------------------------------------------
 print('working')
@@ -27,6 +30,3 @@ Sermon3 = Sermon("19-20 JAN 2026", "Deuteronomy", "34:1-12",
                  "wtccc.ca/sermons.php?select=2&sermfile=sermons-2006.dat", "李思敬博士")
 
 database = SermonDatabase()
-database.add_sermon(Sermon1)
-database.add_sermon(Sermon2)
-database.add_sermon(Sermon3)
