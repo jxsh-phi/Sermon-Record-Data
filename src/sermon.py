@@ -6,6 +6,10 @@ class Sermon():
         self.url = url
         self.speaker = speaker
 
+    def __str__(self):
+        string = f"{self.date}, {self.book}, {self.passage}, {self.url}, {self.speaker}"
+        return string
+
 class SermonDatabase():
     def __init__(self):
         self.sermon_list = []
@@ -19,6 +23,13 @@ class SermonDatabase():
     def display_sermons(self):
         for sermon in self.sermon_list:
             print(sermon.date, sermon.book, sermon.passage, sermon.url, sermon.speaker)
+
+    def __str__(self):
+        string = "The Sermon Database is: " + '\n'
+
+        for sermon in self.sermon_list:
+            string += str(sermon) + '\n'
+        return string
 
 # ----------------------------------------------------------------------------------------------------
 print('working')
@@ -34,6 +45,8 @@ database = SermonDatabase()
 database.add_sermon(Sermon1)
 database.add_sermon(Sermon2)
 database.add_sermon(Sermon3)
-database.display_sermons()
+#database.display_sermons()
 database.remove_sermon(Sermon2)
-database.display_sermons()
+
+print(Sermon1)
+print(database)
