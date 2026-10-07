@@ -1,3 +1,6 @@
+import json
+
+
 class Sermon():
     def __init__(self, date, book, passage, url, speaker):
         self.date = date
@@ -26,6 +29,23 @@ class SermonDatabase():
             print(sermon.date, sermon.book, sermon.passage,
                   sermon.url, sermon.speaker)
 
+    def save(self):
+        sermon_data = []
+
+        for sermon in self.sermon_list:
+            sermon_dict = {
+                "date": sermon.date,
+                "book": sermon.book,
+                "passage": sermon.passage,
+                "url": sermon.url,
+                "speaker": sermon.speaker
+            }
+
+            sermon_data.append(sermon_dict)
+
+        with open('sermon.json', 'w') as f:
+            json.dump(sermon_data, f, indent=4)
+
     def __str__(self):
         string = "The Sermon Database is: " + '\n'
 
@@ -48,8 +68,5 @@ database = SermonDatabase()
 database.add_sermon(Sermon1)
 database.add_sermon(Sermon2)
 database.add_sermon(Sermon3)
-# database.display_sermons()
-database.remove_sermon(Sermon2)
 
-print(Sermon1)
-print(database)
+database.save()
