@@ -43,7 +43,7 @@ class SermonDatabase():
 
             sermon_data.append(sermon_dict)
 
-        with open('sermon.json', 'w') as f:
+        with open('./data/sermon.json', 'w') as f:
             json.dump(sermon_data, f, indent=4)
 
     def __str__(self):
