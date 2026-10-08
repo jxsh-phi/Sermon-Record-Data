@@ -30,6 +30,9 @@ class SermonDatabase():
                   sermon.url, sermon.speaker)
 
     def save(self):
+
+        # save() saves the objects in self.sermon_list into a json file
+
         sermon_data = []
 
         for sermon in self.sermon_list:
@@ -45,6 +48,23 @@ class SermonDatabase():
 
         with open('./data/sermon.json', 'w') as f:
             json.dump(sermon_data, f, indent=4)
+            # A list of dict
+
+    def load(self):
+        try:
+            with open('./data/sermon.json', 'r') as f:
+                sermon_data = json.load(f)
+
+                for s in sermon_data:
+                    sermon = Sermon(s['date'], s['book'],
+                                    s['passage'], s['url'], s['speaker'])
+                    self.sermon_list.append(sermon)
+
+        except json.JSONDecodeError:
+            print("Error: Invalid JSON format in the file.")
+
+        except json.JSONDecodeError:
+            print("Error: Invalid JSON format in the file.")
 
     def __str__(self):
         string = "The Sermon Database is: " + '\n'
@@ -56,6 +76,8 @@ class SermonDatabase():
 
 # ----------------------------------------------------------------------------------------------------
 print('working')
+
+'''
 Sermon1 = Sermon("1-3 JAN 2026", "Deuteronomy", "24:14-22",
                  "youtu.be/pFpdztW09H4?si=L2qI-L3A3EuE119c", "李思敬博士")
 Sermon2 = Sermon("12-13 JAN 2026", "Deuteronomy", "30:11-20",
@@ -63,10 +85,11 @@ Sermon2 = Sermon("12-13 JAN 2026", "Deuteronomy", "30:11-20",
 Sermon3 = Sermon("19-20 JAN 2026", "Deuteronomy", "34:1-12",
                  "wtccc.ca/sermons.php?select=2&sermfile=sermons-2006.dat", "李思敬博士")
 
-database = SermonDatabase()
-
 database.add_sermon(Sermon1)
 database.add_sermon(Sermon2)
 database.add_sermon(Sermon3)
+'''
 
-database.save()
+database = SermonDatabase()
+database.load()
+print(database.sermon_list)
