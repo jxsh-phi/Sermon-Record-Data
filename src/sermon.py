@@ -92,4 +92,4 @@ database.add_sermon(Sermon3)
 
 database = SermonDatabase()
 database.load()
-print(database.sermon_list)
+database.display_sermons()
